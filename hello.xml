@@ -1,0 +1,26 @@
+<tryton>
+  <data>
+    <!-- create sequence -->
+    <record model="ir.sequence.type" id="sequence_type_hello">
+      <field name="name">Hello</field>
+      <field name="code">hello</field>
+    </record>
+    <record model="ir.sequence" id="sequence_hello">
+      <field name="name">Hello</field>
+      <field name="code">hello</field>
+    </record>
+
+
+
+    <record model="ir.ui.view" id="hello_view_tree">
+      <field name="model">hello</field>
+      <field name="name">hello_tree</field>
+      <field name="inherit" ref="hello.hello_view_tree"/>
+    </record>
+    <record model="ir.ui.view" id="hello_view_form">
+      <field name="model">hello</field>
+      <field name="name">hello_form</field>
+      <field name="inherit" ref="hello.hello_view_form"/>
+    </record>
+  </data>
+</tryton>
