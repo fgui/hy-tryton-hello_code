@@ -1,7 +1,7 @@
 (import [trytond.pool [PoolMeta Pool]])
-(import [trytond.model [fields]])
+(import [trytond.model [fields ModelSingleton ModelSQL ModelView]])
 
-(def --all-- ["Hello"])
+(def --all-- ["Hello", "Configuration"])
 
 (defn no-empty-code-values [values]
   (if (and (in "code" values) (not (get values "code")))
@@ -10,15 +10,21 @@
         n-values)
     values))
 
+
+
+
+
 (defclass Hello []
   "Hello Code"
   [--name-- "hello"
    --metaclass-- PoolMeta
+   code (.Char fields "Code")
    ]
 
   
   (with-decorator classmethod
     (defn write [cls records values &rest args]
+      (print "write")
       (.write (super Hello cls) records (no-empty-code-values values) #*
               (->> (partition args 2)
                    (map (fn [pair] [(first pair) (no-empty-code-values (second pair))]))
