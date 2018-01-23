@@ -1,0 +1,4 @@
+<form string="Configuration">
+     <label name="sequence"/>
+     <field name="sequence"/>
+</form>

@@ -1,7 +1,7 @@
 (import [trytond.pool [PoolMeta Pool]])
 (import [trytond.model [fields ModelSingleton ModelSQL ModelView]])
 
-(def --all-- ["Hello", "Configuration"])
+(def --all-- ["Hello" "Configuration"])
 
 (defn no-empty-code-values [values]
   (if (and (in "code" values) (not (get values "code")))
@@ -11,7 +11,13 @@
     values))
 
 
-
+(defclass Configuration [ModelSingleton ModelSQL ModelView]
+  "Hello Config"
+  [--name-- "hello.configuration"
+   sequence (.Many2One fields
+                       "ir.sequence"
+                       "Sequence"
+                       :domain [(, "code" "=" "hello")])])
 
 
 (defclass Hello []

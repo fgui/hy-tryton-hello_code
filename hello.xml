@@ -1,5 +1,29 @@
 <tryton>
   <data>
+
+    <!-- configuration -->
+    <record model="ir.ui.view" id="configuration_form">
+      <field name="model">hello.configuration</field>
+      <field name="type">form</field>
+      <field name="name">configuration_form</field>
+    </record>
+    
+    <record model="ir.action.act_window" id="act_configuration">
+      <field name="name">Configuration</field>
+      <field name="res_model">hello.configuration</field>
+    </record>
+
+    <record model="ir.action.act_window.view"
+            id="act_configuraiton_form">
+      <field name="sequence" eval="20"/>
+      <field name="view" ref="configuration_form"/>
+      <field name="act_window" ref="act_configuration"/>
+    </record>
+    
+    <menuitem id="menu_configuration" sequence="1"
+	      parent="hello.menu_hello"
+	      icon="tryton-list" action="act_configuration"/>
+    
     <!-- create sequence -->
     <record model="ir.sequence.type" id="sequence_type_hello">
       <field name="name">Hello</field>
@@ -9,8 +33,6 @@
       <field name="name">Hello</field>
       <field name="code">hello</field>
     </record>
-
-
 
     <record model="ir.ui.view" id="hello_view_tree">
       <field name="model">hello</field>
