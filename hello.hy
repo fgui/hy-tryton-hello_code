@@ -45,10 +45,15 @@
       ;; (setv Sequence (.get (Pool) "ir.sequence")
       ;;       sequence (first (.search Sequence (,["code" "=" "hello"]))))
 
-      (setv Sequence (.get (Pool) "ir.sequence")
-            ModelData (.get (Pool) "ir.model.data")
-            sequence-id (.get_id ModelData "hello_code" "sequence_hello"))
+      ;;(setv Sequence (.get (Pool) "ir.sequence")
+      ;;      ModelData (.get (Pool) "ir.model.data")
+      ;;      sequence-id (.get_id ModelData "hello_code" "sequence_hello"))
 
+      (setv Sequence (.get (Pool) "ir.sequence")
+            Configuration (.get (Pool) "hello.configuration")
+            config (Configuration 1)
+            sequence-id config.sequence.id)
+      
       (->>
         vlist
         (map (fn [x]
