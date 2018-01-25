@@ -1,6 +1,7 @@
 <tryton>
   <data>
 
+
     <!-- configuration -->
     <record model="ir.ui.view" id="configuration_form">
       <field name="model">hello.configuration</field>
@@ -44,5 +45,46 @@
       <field name="name">hello_form</field>
       <field name="inherit" ref="hello.hello_view_form"/>
     </record>
+
+    <!-- security -->
+    <record model="res.group" id="group_hello_admin">
+      <field name="name">Hello Admin</field>
+    </record>
+
+    <!-- add users admin and trigger to the created group -->
+    <record model="res.user-res.group" id="user_admin_group_hello_admin">
+      <field name="user" ref="res.user_admin"/>
+      <field name="group" ref="group_hello_admin"/>
+    </record>
+    
+    <record model="res.user-res.group" id="user_trigger_group_hello_admin">
+      <field name="user" ref="res.user_trigger"/>
+      <field name="group" ref="group_hello_admin"/>
+    </record>
+
+    <!-- menu access configuration -->
+    <record model="ir.ui.menu-res.group" id="menu_hello_group_hello_admin">
+       <field name="menu" ref="menu_configuration"/>
+       <field name="group" ref="group_hello_admin"/>
+    </record>
+
+    <!-- datamodel access -->
+     <record model="ir.model.access" id="access_hello_config">
+       <field name="model" search="[('model', '=', 'hello.configuration')]"/>
+       <field name="perm_read" eval="False"/>
+       <field name="perm_write" eval="False"/>
+       <field name="perm_create" eval="False"/>
+       <field name="perm_delete" eval="False"/>
+     </record>
+     <record model="ir.model.access" id="access_hello_config_admin">
+       <field name="model" search="[('model', '=', 'hello.configuration')]"/>
+       <field name="group" ref="group_hello_admin"/>
+       <field name="perm_read" eval="True"/>
+       <field name="perm_write" eval="True"/>
+       <field name="perm_create" eval="True"/>
+       <field name="perm_delete" eval="True"/>
+     </record>
+
+
   </data>
 </tryton>
